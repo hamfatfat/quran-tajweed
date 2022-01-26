@@ -1,4 +1,4 @@
-# qurantajweed
+# quran_tajweed
 
 A new Flutter project.
 

@@ -1,9 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_advanced_networkimage/provider.dart';
-import 'package:flutter_advanced_networkimage/transition.dart';
-import 'package:flutter_advanced_networkimage/zoomable.dart';
-import 'package:qurantajweed/screens/SharedPreferencesHelper.dart';
+import 'package:photo_view/photo_view.dart';
 
 import 'globals.dart' as globals;
 
@@ -14,12 +12,12 @@ class SliderWidget extends StatefulWidget {
   final int page;
   final int jump;
   const SliderWidget({
-    Key key,
-    @required this.imageUrls,
-    @required this.imageBorderRadius,
-    @required this.idx,
-    @required this.page,
-    @required this.jump,
+    key,
+    required this.imageUrls,
+    required this.imageBorderRadius,
+    required this.idx,
+    required this.page,
+    required this.jump,
   }) : super(key: key);
   @override
   ImageSliderWidgetState createState() {
@@ -79,18 +77,8 @@ class ImageSliderWidgetState extends State<SliderWidget> {
   }
 
   Widget _buildImagePageItem(String imgUrl) {
-    return ZoomableWidget(
-        maxScale: 5.0,
-        minScale: 0.5,
-        multiFingersPan: false,
-        singleFingerPan: false,
-        autoCenter: true, // placeholder: CircularProgressIndicator(),
-        child: Container(
-            child: TransitionToImage(
-                image: AdvancedNetworkImage(imgUrl,
-                    useDiskCache: true,
-                    cacheRule: CacheRule(maxAge: const Duration(days: 36600))),
-                placeholder: new CircularProgressIndicator())));
+    return PhotoView(imageProvider: CachedNetworkImageProvider(imgUrl),
+      backgroundDecoration: BoxDecoration(color: Colors.transparent),);
     // onZoomChanged: (double value) => print(value),
   }
 }

@@ -10,11 +10,11 @@ class ContentScreen extends StatelessWidget {
   final String name;
   // In the constructor", require a Todo.
   ContentScreen(
-      {Key key, @required this.idx, @required this.jump, @required this.name})
+      {key, required this.idx, required this.jump, required this.name})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
-    List souras = soura
+    List<Widget> souras = soura
         .map((e) => (GestureDetector(
             child: new Container(
                 padding: EdgeInsets.only(top: 5.0),
@@ -43,6 +43,7 @@ class ContentScreen extends StatelessWidget {
         .toList();
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: Color(0xFF283406),
           title: Text('الفهرس'),
         ),
         body: DecoratedBox(

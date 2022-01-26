@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:qurantajweed/screens/SharedPreferencesHelper.dart';
+import 'SharedPreferencesHelper.dart';
 import 'contentscreen.dart';
 import 'searchscreen.dart';
 import 'slider.dart';
@@ -19,11 +19,11 @@ class DetailScreen extends StatelessWidget {
   }
 
   DetailScreen(
-      {Key key,
-      @required this.idx,
-      @required this.page,
-      @required this.jump,
-      @required this.name})
+      {key,
+      required this.idx,
+      required this.page,
+      required this.jump,
+      required this.name})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,7 @@ class DetailScreen extends StatelessWidget {
     final _imageUrls = List<String>.generate(
       629,
       (index) =>
-          "http://94.237.91.161/quran" +
+          "https://azan.archi-tech-group.com/img/quran" +
           ((idx + 1) < 10 ? "0" : "").toString() +
           (idx + 1).toString() +
           "/page" +
@@ -65,6 +65,7 @@ class DetailScreen extends StatelessWidget {
         child: Scaffold(
             key: _scaffoldKey,
             appBar: AppBar(
+              backgroundColor: Color(0xFF283406),
               title: Text(name != null ? name : ''),
             ),
             body: DecoratedBox(
@@ -313,7 +314,7 @@ class DetailScreen extends StatelessWidget {
                 //Navigator.push(context, MaterialPageRoute(builder: (_) {
                 //    return ContentScreen(idx: idx, jump: jump, name: this.name);
                 //  }));
-                _scaffoldKey.currentState.openDrawer();
+                _scaffoldKey.currentState!.openDrawer();
               },
               label: Text('القائمة'),
               icon: Icon(Icons.view_list),

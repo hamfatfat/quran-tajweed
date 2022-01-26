@@ -10,7 +10,7 @@ class SearchScreen extends StatefulWidget {
   final int idx;
   final int jump;
   final String name;
-  SearchScreen({Key key, @required this.idx, @required this.jump, @required this.name}) : super(key: key);
+  SearchScreen({key, required this.idx, required this.jump, required this.name}) : super(key: key);
   @override
   SearchScreenState createState() => new SearchScreenState(this.idx, this.jump, this.name);
 }
@@ -22,8 +22,8 @@ class SearchScreenState extends State<SearchScreen> {
   SearchScreenState(@required this.idx, @required this.jump, @required this.name);
 
   TextEditingController editingController = TextEditingController();
-  var items = List<Ayah>();
-  var duplicateItems = List<Ayah>();
+  List<Ayah> items = [];
+  List<Ayah> duplicateItems = [];
   @override
   void initState() {
     var quran = new Quran();
@@ -33,9 +33,9 @@ class SearchScreenState extends State<SearchScreen> {
   }
 
   void filterSearchResults(String query) {
-    List<Ayah> dummySearchList = List<Ayah>();
+    List<Ayah> dummySearchList = [];
     if (query.isNotEmpty) {
-      List<Ayah> dummyListData = List<Ayah>();
+      List<Ayah> dummyListData = [];
       duplicateItems.forEach((item) {
         if (item.nass_safy.contains(query)) {
           item.suraText = soura.firstWhere((x) => x.id == item.sura).soura;
@@ -59,6 +59,7 @@ class SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: Color(0xFF283406),
           title: Text('البحث'),
         ),
         body: DecoratedBox(

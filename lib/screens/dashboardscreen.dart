@@ -1,9 +1,9 @@
 import 'dart:io';
 
-import 'package:flutter/material.dart';
-import 'package:flutter_advanced_networkimage/provider.dart';
-import 'pageviewerscreen.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/material.dart';
+import 'package:photo_view/photo_view.dart';
+import 'pageviewerscreen.dart';
 
 class QuranNovels {
   QuranNovels(int id, String name, int jump, String folder) {
@@ -12,10 +12,10 @@ class QuranNovels {
     this.jump = jump;
     this.folder = folder;
   }
-  int id;
-  String name;
-  int jump;
-  String folder;
+  late int id;
+  late String name;
+  late int jump;
+  late  String folder;
 }
 
 enum ConfirmAction { CANCEL, ACCEPT }
@@ -41,7 +41,7 @@ class DashboardScreen extends StatelessWidget {
     new QuranNovels(9, "مصحف القراءات", 0, "quran10")
   ];
 
-  Future<bool> _asyncConfirmDialog(BuildContext context) async {
+  Future<bool?> _asyncConfirmDialog(BuildContext context) async {
     return showDialog<bool>(
       context: context,
       barrierDismissible: false, // user must tap button for close dialog!
@@ -70,7 +70,7 @@ class DashboardScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List books = quranNovels
+    List<Widget> books = quranNovels
         .map((e) => (GestureDetector(
             child: new Container(
                 padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
@@ -79,12 +79,12 @@ class DashboardScreen extends StatelessWidget {
                   new Container(
                       padding: EdgeInsets.only(
                           top: 10.0, bottom: 10, left: 10, right: 10),
-                      child: Image(
-                          image: AdvancedNetworkImage(
-                              'http://94.237.91.161/' + e.folder + '/page0.jpg',
-                              useDiskCache: true,
-                              cacheRule: CacheRule(
-                                  maxAge: const Duration(days: 36600))), width: 150)
+                      child: CachedNetworkImage( placeholder: (context, url) =>
+                          Container(child:Center(child:CircularProgressIndicator()), width: 50,height: 50,),
+                          imageUrl: "https://azan.archi-tech-group.com/img/" + e.folder + "/page0.jpg",
+                          width:100,
+                          height:130),
+
                       // onZoomChanged: (double value) => print(value),
                       ),
                   Flexible(
@@ -101,10 +101,9 @@ class DashboardScreen extends StatelessWidget {
               }));
             })))
         .toList();
-    return new WillPopScope(
-        onWillPop: () => _asyncConfirmDialog(context),
-        child: Scaffold(
+    return Scaffold(
             appBar: AppBar(
+              backgroundColor: Color(0xFF283406),
               automaticallyImplyLeading: false,
               title: Text('القراءات'),
             ),
@@ -116,6 +115,6 @@ class DashboardScreen extends StatelessWidget {
                       image: AssetImage('images/bg.png'), fit: BoxFit.cover),
                 ),
                 child: ListView(
-                    scrollDirection: Axis.vertical, children: books))));
+                    scrollDirection: Axis.vertical, children: books)));
   }
 }

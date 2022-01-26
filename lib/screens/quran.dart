@@ -1,11 +1,11 @@
 class Ayah {
-  int id;
-  int sura;
-  int aya;
-  String suraText;
-  String text;
-  String nass_safy;
-  int safha;
+  late int id;
+  late int sura;
+  late int aya;
+  late String suraText;
+  late String text;
+  late String nass_safy;
+  late int safha;
    Ayah(int id, int sura, int aya, String text, String nass_safy, int safha){
      this.id=id;
      this.sura=sura;
@@ -20,7 +20,7 @@ class Ayah {
 
 class Quran {
   List<Ayah> getQuranAyat() {
-    List<Ayah> ayats = new List<Ayah>();
+    List<Ayah> ayats = [];
     ayats.add(new Ayah(1, 1, 1, "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ",
         "بسم الله الرحمن الرحيم", 1));
     ayats.add(new Ayah(2, 1, 2, "الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ",

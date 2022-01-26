@@ -4,9 +4,9 @@ class Soura {
     this.soura = soura;
     this.page = page;
   }
-  int id;
-  String soura;
-  int page;
+  late int id;
+  late String soura;
+  late int page;
 }
 final List<Soura> soura = [
   new Soura(1, "الفاتحة", 1),
